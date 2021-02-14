@@ -13,10 +13,11 @@
 
     &:active, &.active {
         color: $color;
+        background:rgb(241, 218, 223);
     }
 
     &:hover {
-        background: #eee;
+        background: rgb(241, 218, 223);
         cursor: pointer;
     }
 }
