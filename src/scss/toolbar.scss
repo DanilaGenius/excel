@@ -12,6 +12,6 @@
     display: flex;
 
     .button {
-        @include button(darkred)
+        @include button(black)
     }
 }

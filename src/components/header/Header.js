@@ -1,4 +1,8 @@
 import {ExcelComponent} from '@core/ExcelComponent';
+import * as actions from '@/redux/actions'
+import {$} from '@core/dom'
+import {defaulsStyles} from '@/constants';
+import {debouce} from '@core/utils'
 
 export class Header extends ExcelComponent {
     static className = 'excel__header'
@@ -6,14 +10,19 @@ export class Header extends ExcelComponent {
     constructor($root, options) {
         super($root, {
             name: 'Header',
-            listeners: ['input','click'],
+            listeners: ['input'],
             ...options
         })
     }
 
+    prepare() {
+        this.onInput = debouce(this.onInput, 500)
+    }
+
     toHTML() {
+        const title = this.store.getState().title
         return `
-        <input type='text' class="input" value="New Table" />
+        <input type='text' class="input" value=${title} />
 
         <div class="">
 
@@ -34,12 +43,9 @@ export class Header extends ExcelComponent {
     }
 
     onInput(event) {
-        // console.log(this.$root)
-        console.log('onInput')
+        const $target = $(event.target)
+        this.$dispatch(actions.changeTitle($target.text()))
     }
 
-    onClick(event) {
-        // console.log(this.$root)
-        console.log('onClick')
-    }
+   
 }
