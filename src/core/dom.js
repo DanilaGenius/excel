@@ -40,6 +40,11 @@ export class Dom {
         return this
     }
 
+    // clear() {
+    //     this.html('')
+    //     return this
+    // }
+
     text(text) {
         if (text || Array.isArray(text)) {
             this.$el.textContent = text
